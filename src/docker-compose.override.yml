@@ -20,25 +20,25 @@ services:
     ports:
       - "5433:1433"
     volumes:
-      - eshop-sqldata:/var/opt/mssql
+      - ./eshop-identitysql:/var/opt/mssql
 
   catalogsql:
     environment:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
     ports:
-      - "5433:1433"
+      - "5434:1433"
     volumes:
-      - eshop-sqldata:/var/opt/mssql
+      - ./eshop-catalogsql:/var/opt/mssql
 
   ordersql:
     environment:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
     ports:
-      - "5433:1433"
+      - "5435:1433"
     volumes:
-      - eshop-sqldata:/var/opt/mssql
+      - ./eshop-ordersql:/var/opt/mssql
 
   nosqldata:
     ports:

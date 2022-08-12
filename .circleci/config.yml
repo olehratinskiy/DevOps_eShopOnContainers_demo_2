@@ -4,6 +4,9 @@ jobs:
   build:
     docker:
       - image: ubuntu-2204:2022.04.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
       
     steps:
       - checkout
@@ -16,4 +19,7 @@ jobs:
 workflows:
   sample:
     jobs:
-      - build
+      - build:
+          context:
+            - build-env-vars
+            - docker-hub-creds

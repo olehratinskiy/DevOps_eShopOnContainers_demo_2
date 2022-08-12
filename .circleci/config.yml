@@ -28,7 +28,8 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            docker-compose build
+            ls
+      # docker-compose build
       # - run:
       #     name: Save Docker image layer cache
       #     command: |

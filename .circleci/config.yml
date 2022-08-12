@@ -18,6 +18,9 @@ jobs:
           name: Build application Docker image
           command: |
             cd src
-            cat docker-compose.yml
+            docker-compose build
   
 workflow:
+  build:
+    jobs:
+      - build

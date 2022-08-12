@@ -9,7 +9,7 @@ jobs:
           working_directory: ~/src/
           name: Run build
           command: |
-            docker login -u olratinskiy -p qwertyuiop123456789
+            docker login -u olehratinskiy -p qwertyuiop123456789
             docker-compose build
           
 workflows:

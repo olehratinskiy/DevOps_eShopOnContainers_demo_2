@@ -18,7 +18,10 @@ jobs:
           command: |
             cd src
             docker-compose build
-  
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker images
 workflow:
   build:
     jobs:

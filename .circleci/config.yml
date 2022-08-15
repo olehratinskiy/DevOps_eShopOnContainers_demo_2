@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Connect to ECR
           command: |
-            aws configuration list
+            aws configure list
 
       # - run:
       #     name: Build application Docker image

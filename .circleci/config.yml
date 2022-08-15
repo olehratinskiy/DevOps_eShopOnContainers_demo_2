@@ -13,15 +13,16 @@ jobs:
               py-pip=9.0.0-r1
             pip install \
               docker-compose==1.12.0 \
-      - run:
-          name: Build application Docker image
-          command: |
-            cd src
-            docker-compose build
-      - deploy:
-          name: Push application Docker image
-          command: |
-            docker images
+            aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/h2y1x0t6
+      # - run:
+      #     name: Build application Docker image
+      #     command: |
+      #       cd src
+      #       docker-compose build
+      # - deploy:
+      #     name: Push application Docker image
+      #     command: |
+      #       docker images
 workflow:
   build:
     jobs:

@@ -1,5 +1,14 @@
 version: 2
+orbs:
+  aws-cli: circleci/aws-cli@2.0
 jobs:
+  aws-cli-cred-setup:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY
+          aws-secret-access-key: AWS_ACCESS_SECRET
+          aws-region: AWS_REGION_NAME
   build:
     docker:
       - image: docker:17.05.0-ce-git
@@ -19,8 +28,7 @@ jobs:
       - run:
           name: Connect to ECR
           command: |
-            aws configure list
-            $(aws ecr get-login --region us-east-1)
+            $(aws ecr get-login)
 
       # - run:
       #     name: Build application Docker image

@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Connect to ECR
           command: |
-            $(aws ecr get-login --region us-east-1)
+            login="$(aws ecr get-login)"
 
       # - run:
       #     name: Build application Docker image

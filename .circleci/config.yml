@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Connect to ECR
           command: |
-            $(aws ecr get-login --region us-east-1)
+            aws configuration list
 
       # - run:
       #     name: Build application Docker image

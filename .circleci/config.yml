@@ -28,10 +28,10 @@ jobs:
       - run:
           name: Connect to ECR
           command: |
-            echo "$AWS_ACCESS_KEY"
-            setx AWS_SECRET_ACCESS_KEY "$AWS_ACCESS_SECRET"
-            set AWS_DEFAULT_REGION="$AWS_REGION_NAME"
-            aws configure list
+            AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY)
+            AWS_SECRET_ACCESS_KEY=$(AWS_ACCESS_SECRET)
+            set AWS_DEFAULT_REGION=$(AWS_REGION_NAME)
+          # aws configure list
 
       # - run:
       #     name: Build application Docker image

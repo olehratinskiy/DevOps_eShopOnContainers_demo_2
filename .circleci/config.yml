@@ -33,7 +33,7 @@ jobs:
             docker images
             aws configure list
             ls
-            # cat ~/.aws/config
+            cat ~/.aws/config
             # cat ~/.aws/credentials
 
             aws ecr get-login-password --profile Oleh

@@ -36,10 +36,10 @@ jobs:
             # cat ~/.aws/credentials
 
             P=$(aws ecr get-login-password --profile Oleh)
-            docker login --username AWS -p $P public.ecr.aws/registry_alias/eshoponcontainers_images
+            docker login --username AWS -p $P public.ecr.aws/h2y1x0t6/eshoponcontainers_images
             echo 1
-            docker tag alpine:latest public.ecr.aws/registry_alias/eshoponcontainers_images
-            docker push public.ecr.aws/registry_alias/eshoponcontainers_images
+            docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
 workflow:
   build:
     jobs:

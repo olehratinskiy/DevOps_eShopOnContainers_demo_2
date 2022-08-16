@@ -32,8 +32,9 @@ jobs:
             ${login}
             
             docker pull mcr.microsoft.com/mssql/server:2019-latest 
-            docker tag mcr.microsoft.com/mssql/server:2019-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
+            docker images
+          # docker tag mcr.microsoft.com/mssql/server:2019-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
+          # docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
           # docker tag eshop/webstatus:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
           # docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
 workflow:

@@ -33,17 +33,17 @@ jobs:
             export AWS_DEFAULT_REGION=$AWS_REGION_NAME
             aws configure list
             login="$(aws ecr get-login)"
-            ${login} 
-
-      # - run:
-      #     name: Build application Docker image
-      #     command: |
-      #       cd src
-      #       docker-compose build
-      # - deploy:
-      #     name: Push application Docker image
-      #     command: |
-      #       docker images
+            ${login}
+      - run:
+          name: Build application Docker image
+          command: |
+            cd src
+            docker-compose build
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker tag eshop/webstatus:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
 workflow:
   build:
     jobs:

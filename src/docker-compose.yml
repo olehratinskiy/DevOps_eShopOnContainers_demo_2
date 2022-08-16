@@ -5,13 +5,7 @@ services:
   seq:
     image: datalust/seq:latest
 
-  identitysql:
-    image: mcr.microsoft.com/mssql/server:2019-latest 
-
-  catalogsql:
-    image: mcr.microsoft.com/mssql/server:2019-latest 
-
-  ordersql:
+  sqldata:
     image: mcr.microsoft.com/mssql/server:2019-latest 
 
   nosqldata:
@@ -29,7 +23,7 @@ services:
       context: .
       dockerfile: Services/Identity/Identity.API/Dockerfile
     depends_on:
-      - identitysql
+      - sqldata
 
   basket-api:
     image: ${REGISTRY:-eshop}/basket.api:${PLATFORM:-linux}-${TAG:-latest}
@@ -47,7 +41,7 @@ services:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
     depends_on:
-      - catalogsql
+      - sqldata
       - rabbitmq
 
   ordering-api:
@@ -56,7 +50,7 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.API/Dockerfile
     depends_on:
-      - ordersql
+      - sqldata
       - rabbitmq
 
   ordering-backgroundtasks:
@@ -65,7 +59,7 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.BackgroundTasks/Dockerfile
     depends_on:
-      - ordersql
+      - sqldata
       - rabbitmq
 
   payment-api:
@@ -82,7 +76,7 @@ services:
       context: .
       dockerfile: Services/Webhooks/Webhooks.API/Dockerfile
     depends_on:
-      - identitysql
+      - sqldata
 
   mobileshoppingapigw:
     image: envoyproxy/envoy:v1.11.1
@@ -94,9 +88,7 @@ services:
       dockerfile: ApiGateways/Mobile.Bff.Shopping/aggregator/Dockerfile
     depends_on:
       - nosqldata
-      - identitysql
-      - catalogsql
-      - ordersql
+      - sqldata
       - identity-api
       - rabbitmq
       - ordering-api
@@ -110,9 +102,7 @@ services:
       dockerfile: ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
     depends_on:
       - nosqldata
-      - identitysql
-      - catalogsql
-      - ordersql
+      - sqldata
       - identity-api
       - rabbitmq
       - ordering-api
@@ -126,9 +116,7 @@ services:
       dockerfile: Services/Ordering/Ordering.SignalrHub/Dockerfile
     depends_on:
       - nosqldata
-      - identitysql
-      - catalogsql
-      - ordersql
+      - sqldata
       - identity-api
       - rabbitmq
       - ordering-api

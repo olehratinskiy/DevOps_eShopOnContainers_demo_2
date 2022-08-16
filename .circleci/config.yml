@@ -30,9 +30,9 @@ jobs:
             ls
             echo 1
             
-            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
-            export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_SECRET
-            export AWS_DEFAULT_REGION=$AWS_REGION_NAME
+            # export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+            # export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_SECRET
+            # export AWS_DEFAULT_REGION=$AWS_REGION_NAME
             
             aws configure set region $AWS_REGION_NAME --profile Oleh 
             aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile Oleh 
@@ -42,7 +42,7 @@ jobs:
             # P=$(aws ecr get-login-password --profile Oleh)
             # echo $P
             # docker login --username AWS -p $P public.ecr.aws
-            docker login --username AWS -p $(aws ecr-public get-login-password --region us-east-1) public.ecr.aws/h2y1x0t6
+            docker login --username AWS -p $(aws ecr-public get-login-password --profile Oleh) public.ecr.aws/h2y1x0t6
             docker login
             echo 1
             # docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images

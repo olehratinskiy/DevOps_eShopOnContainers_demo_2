@@ -35,7 +35,7 @@ jobs:
             # cat ~/.aws/config
             # cat ~/.aws/credentials
 
-            aws ecr get-login-password --profile Oleh          
+            aws ecr get-login-password
             docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
 workflow:

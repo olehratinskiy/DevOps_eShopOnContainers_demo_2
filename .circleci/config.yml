@@ -9,19 +9,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache \
-              py-pip=9.0.0-r1
-            pip install \
-              docker-compose==1.12.0 \
+            apk add --no-cache py-pip=9.0.0-r1
+            pip install docker-compose==1.12.0
       - run:
           name: Install awscli
           command: pip install awscli
-      - run:
-          name: Connect to ECR
-          command: |
-            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
-            export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_SECRET
-            export AWS_DEFAULT_REGION=$AWS_REGION_NAME
+            
       #       aws configure list
       # - run:
       #     name: Build application Docker image
@@ -31,8 +24,13 @@ jobs:
       - deploy:
           name: Push application Docker image
           command: |
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+            export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_SECRET
+            export AWS_DEFAULT_REGION=$AWS_REGION_NAME
+
             login="$(aws ecr get-login)"
             ${login}
+            
             docker tag mcr.microsoft.com/mssql/server:2019-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
           # docker tag eshop/webstatus:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest

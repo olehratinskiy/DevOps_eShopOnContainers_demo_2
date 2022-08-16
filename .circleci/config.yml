@@ -31,9 +31,9 @@ jobs:
             docker pull alpine
             docker images
             aws configure list
-
-            cat ~/.aws/config
-            cat ~/.aws/credentials
+            ls
+            # cat ~/.aws/config
+            # cat ~/.aws/credentials
 
             # aws ecr get-login-password --profile ecr-user          
             # docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest

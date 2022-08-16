@@ -35,7 +35,8 @@ jobs:
             echo 1
             # cat ~/.aws/credentials
 
-            aws ecr get-login-password --profile Oleh
+            P=$(aws ecr get-login-password --profile Oleh)
+            docker login --username AWS -p $P public.ecr.aws/h2y1x0t6
             echo 1
             docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest

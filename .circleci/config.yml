@@ -28,10 +28,11 @@ jobs:
       - run:
           name: Connect to ECR
           command: |
-            export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY"
-            export AWS_SECRET_ACCESS_KEY="$AWS_ACCESS_SECRET"
-            export AWS_DEFAULT_REGION="$AWS_REGION_NAME"
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+            export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_SECRET
+            export AWS_DEFAULT_REGION=$AWS_REGION_NAME
             aws configure list
+            aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/h2y1x0t6
 
       # - run:
       #     name: Build application Docker image

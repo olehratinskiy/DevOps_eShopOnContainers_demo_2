@@ -20,35 +20,35 @@ jobs:
             cd src
             docker-compose build
             docker images
-      # - deploy:
-      #     name: Push application Docker image
-      #     command: |        
-      #       aws configure set region $AWS_REGION_NAME --profile $AWS_USER_NAME 
-      #       aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile $AWS_USER_NAME 
-      #       aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile $AWS_USER_NAME
+      - deploy:
+          name: Push application Docker image
+          command: |        
+            aws configure set region $AWS_REGION_NAME --profile $AWS_USER_NAME 
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile $AWS_USER_NAME 
+            aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile $AWS_USER_NAME
 
-      #       P=$(aws ecr-public get-login-password --profile $AWS_USER_NAME)
+            P=$(aws ecr-public get-login-password --profile $AWS_USER_NAME)
 
-      #       docker login --username AWS -p $P public.ecr.aws/h2y1x0t6
+            docker login --username AWS -p $P public.ecr.aws/h2y1x0t6
 
-      #       docker tag eshop/webspa:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/webmvc:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/webshoppingagg:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/ordering.signalrhub:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/mobileshoppingagg:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/ordering.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/ordering.backgroundtasks:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/payment.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/basket.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/catalog.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/identity.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/webhooks.client:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/webhooks.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/webstatus:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/mcr.microsoft.com/dotnet/sdk:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-      #       docker tag eshop/mcr.microsoft.com/dotnet/aspnet:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webspa:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webmvc:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webshoppingagg:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/ordering.signalrhub:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/mobileshoppingagg:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/ordering.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/ordering.backgroundtasks:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/payment.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/basket.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/catalog.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/identity.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webhooks.client:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webhooks.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webstatus:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/mcr.microsoft.com/dotnet/sdk:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/mcr.microsoft.com/dotnet/aspnet:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images
             
-      #       docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
 
 workflow:
   build:

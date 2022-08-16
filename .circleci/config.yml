@@ -59,9 +59,9 @@ jobs:
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webhooks.api
             docker tag eshop/webstatus:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webstatus
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webstatus
-            docker tag mcr.microsoft.com/dotnet/sdk:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images:mcr.microsoft.com/dotnet/sdk
+            docker tag mcr.microsoft.com/dotnet/sdk:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-sdk
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-sdk
-            docker tag mcr.microsoft.com/dotnet/aspnet:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images:mcr.microsoft.com/dotnet/aspnet
+            docker tag mcr.microsoft.com/dotnet/aspnet:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-aspnet
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-aspnet
 
 workflow:

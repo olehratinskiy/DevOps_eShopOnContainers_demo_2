@@ -31,38 +31,38 @@ jobs:
 
             docker login --username AWS -p $P public.ecr.aws/h2y1x0t6
 
-            docker tag eshop/webspa:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webspa
-            docker tag eshop/webmvc:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webmvc
-            docker tag eshop/webshoppingagg:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webshoppingagg
-            docker tag eshop/ordering.signalrhub:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:ordering.signalrhub
-            docker tag eshop/mobileshoppingagg:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:mobileshoppingagg
-            docker tag eshop/ordering.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:ordering.api
-            docker tag eshop/ordering.backgroundtasks:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:ordering.backgroundtasks
-            docker tag eshop/payment.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:payment.api
-            docker tag eshop/basket.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:basket.api
-            docker tag eshop/catalog.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:catalog.api
-            docker tag eshop/identity.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:identity.api
-            docker tag eshop/webhooks.client:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webhooks.client
-            docker tag eshop/webhooks.api:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webhooks.api
-            docker tag eshop/webstatus:linux-latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webstatus
-            docker tag mcr.microsoft.com/dotnet/sdk:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:mcr.microsoft.com/dotnet/sdk
-            docker tag mcr.microsoft.com/dotnet/aspnet:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:mcr.microsoft.com/dotnet/aspnet
+            docker tag eshop/webspa:webspa public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webmvc:webmvc public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webshoppingagg:webshoppingagg public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/ordering.signalrhub:ordering.signalrhub public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/mobileshoppingagg:mobileshoppingagg public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/ordering.api:ordering.api public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/ordering.backgroundtasks:ordering.backgroundtasks public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/payment.api:payment.api public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/basket.api:basket.api public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/catalog.api:catalog.api public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/identity.api:identity.api public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webhooks.client:webhooks.client public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webhooks.api:webhooks.api public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag eshop/webstatus:webstatus public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag mcr.microsoft.com/dotnet/sdk:mcr.microsoft.com/dotnet/sdk public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker tag mcr.microsoft.com/dotnet/aspnet:mcr.microsoft.com/dotnet/aspnet public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
 
 workflow:
   build:

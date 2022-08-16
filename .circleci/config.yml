@@ -28,13 +28,15 @@ jobs:
             docker images
             aws configure list
             ls
+            echo 1
             aws configure set region $AWS_REGION_NAME --profile Oleh 
             aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile Oleh 
             aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile Oleh 
-            
+            echo 1
             # cat ~/.aws/credentials
 
             aws ecr get-login-password --profile Oleh
+            echo 1
             docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
 workflow:

@@ -14,31 +14,31 @@ jobs:
       - run:
           name: Install awscli
           command: pip install awscli
-            
-      #       aws configure list
-      # - run:
-      #     name: Build application Docker image
-      #     command: |
-      #       cd src
-      #       docker-compose build
-      - deploy:
-          name: Push application Docker image
-          command: |        
-            docker pull alpine
+      - run:
+          name: Build application Docker image
+          command: |
+            cd src
+            docker-compose build
             docker images
-            aws configure list
-            ls
+
+      # - deploy:
+      #     name: Push application Docker image
+      #     command: |        
+      #       docker pull alpine
+      #       docker images
+      #       aws configure list
+      #       ls
             
-            aws configure set region $AWS_REGION_NAME --profile Oleh 
-            aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile Oleh 
-            aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile Oleh
+      #       aws configure set region $AWS_REGION_NAME --profile Oleh 
+      #       aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile Oleh 
+      #       aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile Oleh
 
-            P=$(aws ecr-public get-login-password --profile Oleh)
+      #       P=$(aws ecr-public get-login-password --profile Oleh)
 
-            docker login --username AWS -p $P public.ecr.aws/h2y1x0t6
+      #       docker login --username AWS -p $P public.ecr.aws/h2y1x0t6
 
-            docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+      #       docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
+      #       docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
 workflow:
   build:
     jobs:

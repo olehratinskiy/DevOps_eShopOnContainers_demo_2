@@ -30,8 +30,8 @@ jobs:
             
             docker pull alpine
             docker images
-            aws ecr-public get-login-password --region us-east-1
-            docker login -u AWS 528401799233.dkr.ecr.us-east-1.amazonaws.com -p $(aws ecr get-login-password --region us-east-1)            
+            aws configure list
+            aws ecr get-login-password --profile ecr-user          
             docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
 workflow:

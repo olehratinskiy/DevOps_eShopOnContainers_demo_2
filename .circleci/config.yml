@@ -28,22 +28,15 @@ jobs:
             docker images
             aws configure list
             ls
-            echo 1
-            
-            # export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
-            # export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_SECRET
-            # export AWS_DEFAULT_REGION=$AWS_REGION_NAME
             
             aws configure set region $AWS_REGION_NAME --profile Oleh 
             aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile Oleh 
-            aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile Oleh 
-            echo 1
+            aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile Oleh
 
-            # P=$(aws ecr get-login-password --profile Oleh)
-            # echo $P
-            # docker login --username AWS -p $P public.ecr.aws
-            docker login --username AWS -p $(aws ecr-public get-login-password --profile Oleh) public.ecr.aws/h2y1x0t6
-            echo 1
+            P=$(aws ecr-public get-login-password --profile Oleh)
+
+            docker login --username AWS -p $P public.ecr.aws/h2y1x0t6
+
             docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images
 workflow:

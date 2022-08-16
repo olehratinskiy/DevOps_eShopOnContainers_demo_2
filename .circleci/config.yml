@@ -32,9 +32,9 @@ jobs:
             docker pull alpine
             docker images
             aws configure list
-            aws ecr get-login-password --profile ecr-user          
-            docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
-            docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
+            # aws ecr get-login-password --profile ecr-user          
+            # docker tag alpine:latest public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
+            # docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:latest
 workflow:
   build:
     jobs:

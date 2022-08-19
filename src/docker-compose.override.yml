@@ -13,15 +13,6 @@ services:
     ports:
       - "5340:80"
 
-  sqldata:
-    environment:
-      - SA_PASSWORD=Pass@word
-      - ACCEPT_EULA=Y
-    ports:
-      - "5433:1433"
-    volumes:
-      - eshop-sqldata:/var/opt/mssql
-
   nosqldata:
     ports:
       - "27017:27017"
@@ -44,7 +35,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - SpaClient=http://3.231.251.109:5104
       - XamarinCallback=http://3.231.251.109:5105/xamarincallback
-      - ConnectionString=r=sqldata;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=Pass@word} # change
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=SQL_Server_1# # change
       - MvcClient=http://3.231.251.109:5100
       - BasketApiClient=http://3.231.251.109:5103
       - OrderingApiClient=http://3.231.251.109:5102
@@ -62,12 +53,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_REDIS_BASKET_DB:-basketdata}
+      - ConnectionString=${ESHOP_AZURE_REDIS_BASKET_DB:-basketdata} # change
       - identityUrl=http://identity-api
-      - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
-      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
-      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
-      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}
+      - IdentityUrlExternal=http://3.231.251.109:5105
+      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq} # change
+      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME} # change
+      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD} # change
       - AzureServiceBusEnabled=False
       - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
       - OrchestratorType=${ORCHESTRATOR_TYPE}
@@ -82,13 +73,13 @@ services:
   catalog-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
-      - PicBaseUrl=${ESHOP_STORAGE_CATALOG_URL}
-      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
-      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
-      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}
-      - AzureStorageAccountName=${ESHOP_AZURE_STORAGE_CATALOG_NAME}
-      - AzureStorageAccountKey=${ESHOP_AZURE_STORAGE_CATALOG_KEY}
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=SQL_Server_1# # change
+      - PicBaseUrl=${ESHOP_STORAGE_CATALOG_URL} # change
+      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq} # change
+      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME} # change
+      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD} # change
+      - AzureStorageAccountName=${ESHOP_AZURE_STORAGE_CATALOG_NAME} # change
+      - AzureStorageAccountKey=${ESHOP_AZURE_STORAGE_CATALOG_KEY} # change
       - UseCustomizationData=True
       - AzureServiceBusEnabled=False
       - AzureStorageEnabled=False
@@ -105,12 +96,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_ORDERING_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=Pass@word}
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# # change
       - identityUrl=http://identity-api
-      - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
-      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
-      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
-      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}
+      - IdentityUrlExternal=http://3.231.251.109:5105
+      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq} # change
+      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME} # change
+      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD} # change
       - UseCustomizationData=True
       - AzureServiceBusEnabled=False
       - CheckUpdateTime=30000
@@ -130,10 +121,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_ORDERING_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=Pass@word}
-      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
-      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
-      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# # change
+      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq} # change
+      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME} # change
+      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD} # change
       - UseCustomizationData=True
       - AzureServiceBusEnabled=False
       - CheckUpdateTime=30000
@@ -162,14 +153,14 @@ services:
 
   webhooks-api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_WEBHOOKS_DB:-Server=sqldata;Database=Microsoft.eShopOnContainers.Services.WebhooksDb;User Id=sa;Password=Pass@word}
-      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
-      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
-      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}
-      - IdentityUrl=http://identity-api
-      - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
+          - ASPNETCORE_ENVIRONMENT=Development
+          - ASPNETCORE_URLS=http://0.0.0.0:80
+          - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.WebhooksDb;User Id=sa;Password=SQL_Server_1# # change
+          - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq} # change
+          - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME} # change
+          - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD} # change
+          - IdentityUrl=http://identity-api
+          - IdentityUrlExternal=http://3.231.251.109:5105
     ports:
       - "5113:80"
 
@@ -202,7 +193,7 @@ services:
       - IdentityUrlHC=http://identity-api/hc
       - BasketUrlHC=http://basket-api/hc
       - PaymentUrlHC=http://payment-api/hc
-      - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
+      - IdentityUrlExternal=http://3.231.251.109:5105
     ports:
       - "5120:80"
 
@@ -221,7 +212,7 @@ services:
       - IdentityUrlHC=http://identity-api/hc
       - BasketUrlHC=http://basket-api/hc
       - PaymentUrlHC=http://payment-api/hc
-      - IdentityUrlExternal=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
+      - IdentityUrlExternal=http://3.231.251.109:5105
     ports:
       - "5121:80"
 
@@ -229,9 +220,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
-      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
-      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}
+      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq} # change
+      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME} # change
+      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD} # change
       - AzureServiceBusEnabled=False
       - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
       - OrchestratorType=${ORCHESTRATOR_TYPE}
@@ -274,13 +265,13 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - IdentityUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
-      - PurchaseUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5202
+      - IdentityUrl=http://3.231.251.109:5105
+      - PurchaseUrl=http://3.231.251.109:5202
       - IdentityUrlHC=http://identity-api/hc
       - UseCustomizationData=True
       - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
       - OrchestratorType=${ORCHESTRATOR_TYPE}
-      - SignalrHubUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5202
+      - SignalrHubUrl=http://3.231.251.109:5202
     ports:
       - "5104:80"
 
@@ -289,8 +280,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - PurchaseUrl=http://webshoppingapigw
-      - IdentityUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
-      - SignalrHubUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5202
+      - IdentityUrl=http://3.231.251.109:5105
+      - SignalrHubUrl=http://3.231.251.109:5202
       - IdentityUrlHC=http://identity-api/hc
       - UseCustomizationData=True
       - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
@@ -303,8 +294,8 @@ services:
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - Token=6168DB8D-DC58-4094-AF24-483278923590      # Webhooks are registered with this token (any value is valid) but the client won't check it
-      - IdentityUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5105
-      - CallBackUrl=http://${ESHOP_EXTERNAL_DNS_NAME_OR_IP}:5114
+      - IdentityUrl=http://3.231.251.109:5105
+      - CallBackUrl=http://3.231.251.109:5114
       - WebhooksUrl=http://webhooks-api
       - SelfUrl=http://webhooks-client/
     ports:

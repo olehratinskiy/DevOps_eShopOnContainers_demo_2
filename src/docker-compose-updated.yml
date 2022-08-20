@@ -7,6 +7,7 @@ version: "3.2"
 # An external IP or DNS name has to be used (instead localhost and the 10.0.75.1 IP) when testing the Web apps and the Xamarin apps from remote machines/devices using the same WiFi, for instance.
 
 services:
+  image: datalust/seq:latest
   seq:
     environment:
       - ACCEPT_EULA=Y
@@ -14,22 +15,29 @@ services:
       - "5340:80"
 
   nosqldata:
+    image: mongo
     ports:
       - "27017:27017"
     volumes:
       - eshop-nosqldata:/data/db
 
   basketdata:
+    image: redis:alpine
     ports:
       - "6379:6379"
     volumes:
       - eshop-basketdata:/data
   rabbitmq:
+    image: rabbitmq:3-management-alpine
     ports:
       - "15672:15672"
       - "5672:5672"
 
   identity-api:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:identity.api
+    build:
+      context: .
+      dockerfile: Services/Identity/Identity.API/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -50,6 +58,14 @@ services:
       - "5105:80"
 
   basket-api:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:basket.api
+    build:
+      context: .
+      dockerfile: Services/Basket/Basket.API/Dockerfile
+    depends_on:
+      - basketdata
+      - identity-api
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -71,6 +87,12 @@ services:
       - "9103:81"
 
   catalog-api:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:catalog.api
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+    depends_on:
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=SQL_Server_1# # change
@@ -91,6 +113,12 @@ services:
       - "9101:81"
 
   ordering-api:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:ordering.api
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+    depends_on:
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -116,6 +144,12 @@ services:
       - "9102:81"
 
   ordering-backgroundtasks:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:ordering.backgroundtasks
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.BackgroundTasks/Dockerfile
+    depends_on:
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -135,6 +169,12 @@ services:
       - "5111:80"
 
   payment-api:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:payment.api
+    build:
+      context: .
+      dockerfile: Services/Payment/Payment.API/Dockerfile
+    depends_on:
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -150,6 +190,10 @@ services:
       - "5108:80"
 
   webhooks-api:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webhooks.api
+    build:
+      context: .
+      dockerfile: Services/Webhooks/Webhooks.API/Dockerfile
     environment:
           - ASPNETCORE_ENVIRONMENT=Development
           - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -163,6 +207,7 @@ services:
       - "5113:80"
 
   mobileshoppingapigw:
+    image: envoyproxy/envoy:v1.11.1
     volumes:
       - ./ApiGateways/Envoy/config/mobileshopping:/etc/envoy
     ports:
@@ -177,6 +222,17 @@ services:
     - "15202:8001"
 
   mobileshoppingagg:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webshoppingagg
+    build:
+      context: .
+      dockerfile: ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
+    depends_on:
+      - nosqldata
+      - identity-api
+      - rabbitmq
+      - ordering-api
+      - catalog-api
+      - basket-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - urls__basket=http://basket-api
@@ -196,6 +252,17 @@ services:
       - "5120:80"
 
   webshoppingagg:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webshoppingagg
+    build:
+      context: .
+      dockerfile: ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
+    depends_on:
+      - nosqldata
+      - identity-api
+      - rabbitmq
+      - ordering-api
+      - catalog-api
+      - basket-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - urls__basket=http://basket-api
@@ -215,6 +282,17 @@ services:
       - "5121:80"
 
   ordering-signalrhub:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:ordering.signalrhub
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.SignalrHub/Dockerfile
+    depends_on:
+      - nosqldata
+      - identity-api
+      - rabbitmq
+      - ordering-api
+      - catalog-api
+      - basket-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -229,6 +307,10 @@ services:
       - "5112:80"
 
   webstatus:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webstatus
+    build:
+      context: .
+      dockerfile: Web/WebStatus/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -260,6 +342,15 @@ services:
       - "5107:80"
 
   webspa:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webspa
+    build:
+      context: .
+      dockerfile: Web/WebSPA/Dockerfile
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:12.0}
+    depends_on:
+      - webshoppingagg
+      - webshoppingapigw
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -274,6 +365,13 @@ services:
       - "5104:80"
 
   webmvc:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webmvc
+    build:
+      context: .
+      dockerfile: Web/WebMVC/Dockerfile
+    depends_on:
+      - webshoppingagg
+      - webshoppingapigw
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -289,6 +387,12 @@ services:
       - "5100:80"
 
   webhooks-client:
+    image: public.ecr.aws/h2y1x0t6/eshoponcontainers_images:webhooks.client
+    build:
+      context: .
+      dockerfile: Web/WebhookClient/Dockerfile
+    depends_on:
+      - webhooks-api
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - Token=6168DB8D-DC58-4094-AF24-483278923590      # Webhooks are registered with this token (any value is valid) but the client won't check it

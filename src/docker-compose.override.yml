@@ -53,7 +53,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=${ESHOP_AZURE_REDIS_BASKET_DB:-basketdata} # change
+      - ConnectionString=basketdata # change
       - identityUrl=http://identity-api
       - IdentityUrlExternal=http://3.231.251.109:5105
       - EventBusConnection=rabbitmq # change
@@ -74,12 +74,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=SQL_Server_1# # change
-      - PicBaseUrl=${ESHOP_STORAGE_CATALOG_URL} # change
+      - PicBaseUrl=http://3.231.251.109:5202/c/api/v1/catalog/items/[0]/pic/ # change
       - EventBusConnection=rabbitmq # change
       - EventBusUserName=guest # change
       - EventBusPassword=guest # change
-      - AzureStorageAccountName=${ESHOP_AZURE_STORAGE_CATALOG_NAME} # change
-      - AzureStorageAccountKey=${ESHOP_AZURE_STORAGE_CATALOG_KEY} # change
       - UseCustomizationData=True
       - AzureServiceBusEnabled=False
       - AzureStorageEnabled=False

@@ -80,9 +80,12 @@ jobs:
       - run:
           name: Connect to AWS instance
           command: |
-            aws configure set region $AWS_REGION_NAME --profile $AWS_USER_NAME 
-            aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile $AWS_USER_NAME 
-            aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile $AWS_USER_NAME
+            PUBLIC_IP=$(curl ipinfo.io/ip)
+            AWS_REGION=$AWS_REGION_NAME
+            SG_ID=sg-0bcfd8ad6fbc77f41
+            aws ec2 authorize-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
+              --protocol tcp --port 22 --cidr $PUBLIC_IP/24
+            sleep 5
             ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-231-251-109.compute-1.amazonaws.com
             ls
             exit

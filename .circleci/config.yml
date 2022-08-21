@@ -64,7 +64,7 @@ jobs:
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-sdk
             docker tag mcr.microsoft.com/dotnet/aspnet:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-aspnet
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-aspnet
-            
+
   deploy:
     docker:
       - image: docker:17.05.0-ce-git
@@ -80,7 +80,10 @@ jobs:
       - run:
           name: Connect to AWS instance
           command: |
-            ssh ec2-user@ec2-3-231-251-109.compute-1.amazonaws.com
+            aws configure set region $AWS_REGION_NAME --profile $AWS_USER_NAME 
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile $AWS_USER_NAME 
+            aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile $AWS_USER_NAME
+            ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-231-251-109.compute-1.amazonaws.com
 
 workflows:
   version: 2

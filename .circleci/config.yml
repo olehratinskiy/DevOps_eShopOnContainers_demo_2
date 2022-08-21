@@ -67,13 +67,14 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
             apk add --no-cache py-pip=9.0.0-r1
+            sudo apt-get install curl
       - run:
           name: Install awscli
           command: pip install awscli

@@ -77,7 +77,7 @@ jobs:
       - run:
           name: Install awscli
           command: pip install awscli
-      - run:
+      - run: 
           name: Connect to AWS instance
           command: |
             PUBLIC_IP=$(curl ipinfo.io/ip)

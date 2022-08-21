@@ -74,7 +74,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --no-cache py-pip=9.0.0-r1
-            sudo apt-get install curl
+            apk add --no-cache curl
       - run:
           name: Install awscli
           command: pip install awscli

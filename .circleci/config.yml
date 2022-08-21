@@ -68,10 +68,18 @@ jobs:
     docker:
       - image: docker:17.05.0-ce-git
     steps:
+      - checkout
       - run:
-          name: Connect to instance
+          name: Install dependencies
           command: |
-            aws
+            apk add --no-cache py-pip=9.0.0-r1
+      - run:
+          name: Install awscli
+          command: pip install awscli
+      - run:
+          name: Connect to AWS instance
+          command: |
+            ssh ec2-user@ec2-3-231-251-109.compute-1.amazonaws.com
 
 workflows:
   version: 2

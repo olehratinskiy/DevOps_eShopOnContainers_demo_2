@@ -64,7 +64,7 @@ jobs:
   #           docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-sdk
   #           docker tag mcr.microsoft.com/dotnet/aspnet:6.0 public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-aspnet
   #           docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-aspnet
-  deployment:
+  deploy:
     docker:
       - image: docker:17.05.0-ce-git
     steps:

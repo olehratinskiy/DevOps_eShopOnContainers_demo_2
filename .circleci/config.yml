@@ -84,7 +84,8 @@ jobs:
             aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile $AWS_USER_NAME 
             aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile $AWS_USER_NAME
             aws configure list --profile $AWS_USER_NAME
-          # aws ssm start-session --target $INSTANCE_ID --document-name deploy_script --profile $AWS_USER_NAME 
+            aws sso login --profile $AWS_USER_NAME 
+          # aws ssm start-session --target $INSTANCE_ID --document-name deploy_script
           # echo 1
           # ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-231-251-109.compute-1.amazonaws.com
           # echo 1

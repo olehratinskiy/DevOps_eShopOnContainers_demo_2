@@ -83,7 +83,7 @@ jobs:
             aws configure set region $AWS_REGION_NAME --profile $AWS_USER_NAME 
             aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile $AWS_USER_NAME 
             aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile $AWS_USER_NAME
-            aws ssm send-command --instance-ids $INSTANCE_ID --document-name "Deployment-Script" --profile $AWS_USER_NAME
+            aws ssm send-command --instance-ids $INSTANCE_ID --document-name "Deployment_Script" --profile $AWS_USER_NAME
 
 workflows:
   version: 2

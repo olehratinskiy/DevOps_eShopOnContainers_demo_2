@@ -1,4 +1,8 @@
 version: 2
+
+orbs:
+  aws-cli: circleci/aws-cli@3.1
+
 jobs:
   build:
     docker:
@@ -66,28 +70,20 @@ jobs:
             docker push public.ecr.aws/h2y1x0t6/eshoponcontainers_images:dotnet-aspnet
 
   deploy:
-    docker:
-      - image: docker:17.05.0-ce-git
+    executor: aws-cli/default
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache py-pip=9.0.0-r1
-      - run:
-          name: Install awscli
-          command: pip install awscli
       - run:
           name: Connect to AWS instance
           command: |
             aws configure set region $AWS_REGION_NAME --profile $AWS_USER_NAME 
             aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile $AWS_USER_NAME 
             aws configure set aws_secret_access_key $AWS_ACCESS_SECRET --profile $AWS_USER_NAME
-            echo 1
-            ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-231-251-109.compute-1.amazonaws.com
-            echo 1
-            ls
-            exit
+          # echo 1
+          # ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-231-251-109.compute-1.amazonaws.com
+          # echo 1
+          # ls
+          # exit
 
 workflows:
   version: 2

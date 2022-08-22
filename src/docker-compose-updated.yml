@@ -43,7 +43,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - SpaClient=http://3.231.251.109:5104
       - XamarinCallback=http://3.231.251.109:5105/xamarincallback
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=SQL_Server_1# # change
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=SQL_Server_1# #  
       - MvcClient=http://3.231.251.109:5100
       - BasketApiClient=http://3.231.251.109:5103
       - OrderingApiClient=http://3.231.251.109:5102
@@ -69,12 +69,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=basketdata # change
+      - ConnectionString=basketdata 
       - identityUrl=http://identity-api
       - IdentityUrlExternal=http://3.231.251.109:5105
-      - EventBusConnection=rabbitmq # change
-      - EventBusUserName=guest # change
-      - EventBusPassword=guest # change
+      - EventBusConnection=rabbitmq 
+      - EventBusUserName=guest 
+      - EventBusPassword=guest 
       - AzureServiceBusEnabled=False
       - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
       - OrchestratorType=${ORCHESTRATOR_TYPE}
@@ -95,11 +95,11 @@ services:
       - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=SQL_Server_1# # change
-      - PicBaseUrl=http://3.231.251.109:5202/c/api/v1/catalog/items/[0]/pic/ # change
-      - EventBusConnection=rabbitmq # change
-      - EventBusUserName=guest # change
-      - EventBusPassword=guest # change
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=SQL_Server_1# 
+      - PicBaseUrl=http://3.231.251.109:5202/c/api/v1/catalog/items/[0]/pic/ 
+      - EventBusConnection=rabbitmq 
+      - EventBusUserName=guest 
+      - EventBusPassword=guest 
       - UseCustomizationData=True
       - AzureServiceBusEnabled=False
       - AzureStorageEnabled=False
@@ -122,12 +122,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# # change
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# 
       - identityUrl=http://identity-api
       - IdentityUrlExternal=http://3.231.251.109:5105
-      - EventBusConnection=rabbitmq # change
-      - EventBusUserName=guest # change
-      - EventBusPassword=guest # change
+      - EventBusConnection=rabbitmq 
+      - EventBusUserName=guest 
+      - EventBusPassword=guest 
       - UseCustomizationData=True
       - AzureServiceBusEnabled=False
       - CheckUpdateTime=30000
@@ -153,10 +153,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# # change
-      - EventBusConnection=rabbitmq # change
-      - EventBusUserName=guest # change
-      - EventBusPassword=guest # change
+      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# 
+      - EventBusConnection=rabbitmq 
+      - EventBusUserName=guest 
+      - EventBusPassword=guest 
       - UseCustomizationData=True
       - AzureServiceBusEnabled=False
       - CheckUpdateTime=30000
@@ -197,10 +197,10 @@ services:
     environment:
           - ASPNETCORE_ENVIRONMENT=Development
           - ASPNETCORE_URLS=http://0.0.0.0:80
-          - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.WebhooksDb;User Id=sa;Password=SQL_Server_1# # change
-          - EventBusConnection=rabbitmq # change
-          - EventBusUserName=guest # change
-          - EventBusPassword=guest # change
+          - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.WebhooksDb;User Id=sa;Password=SQL_Server_1# 
+          - EventBusConnection=rabbitmq 
+          - EventBusUserName=guest 
+          - EventBusPassword=guest 
           - IdentityUrl=http://identity-api
           - IdentityUrlExternal=http://3.231.251.109:5105
     ports:
@@ -297,9 +297,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - EventBusConnection=rabbitmq # change
-      - EventBusUserName=guest # change
-      - EventBusPassword=guest # change
+      - EventBusConnection=rabbitmq 
+      - EventBusUserName=guest 
+      - EventBusPassword=guest 
       - AzureServiceBusEnabled=False
       - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
       - OrchestratorType=${ORCHESTRATOR_TYPE}

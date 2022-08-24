@@ -43,7 +43,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - SpaClient=http://3.231.251.109:5104
       - XamarinCallback=http://3.231.251.109:5105/xamarincallback
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=SQL_Server_1# #  
+      - ConnectionString=Server=tcp:10.150.0.5,1433;Database=Microsoft.eShopOnContainers.Service.IdentityDb;User Id=sa;Password=SQL_Server_1# #  
       - MvcClient=http://3.231.251.109:5100
       - BasketApiClient=http://3.231.251.109:5103
       - OrderingApiClient=http://3.231.251.109:5102
@@ -95,7 +95,7 @@ services:
       - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=SQL_Server_1# 
+      - ConnectionString=Server=tcp:10.150.0.5,1433;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=SQL_Server_1# 
       - PicBaseUrl=http://3.231.251.109:5202/c/api/v1/catalog/items/[0]/pic/ 
       - EventBusConnection=rabbitmq 
       - EventBusUserName=guest 
@@ -122,7 +122,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# 
+      - ConnectionString=Server=tcp:10.150.0.5,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# 
       - identityUrl=http://identity-api
       - IdentityUrlExternal=http://3.231.251.109:5105
       - EventBusConnection=rabbitmq 
@@ -153,7 +153,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# 
+      - ConnectionString=Server=tcp:10.150.0.5,1433;Database=Microsoft.eShopOnContainers.Services.OrderingDb;User Id=sa;Password=SQL_Server_1# 
       - EventBusConnection=rabbitmq 
       - EventBusUserName=guest 
       - EventBusPassword=guest 
@@ -197,7 +197,7 @@ services:
     environment:
           - ASPNETCORE_ENVIRONMENT=Development
           - ASPNETCORE_URLS=http://0.0.0.0:80
-          - ConnectionString=Server=tcp:35.188.254.36,1433;Database=Microsoft.eShopOnContainers.Services.WebhooksDb;User Id=sa;Password=SQL_Server_1# 
+          - ConnectionString=Server=tcp:10.150.0.5,1433;Database=Microsoft.eShopOnContainers.Services.WebhooksDb;User Id=sa;Password=SQL_Server_1# 
           - EventBusConnection=rabbitmq 
           - EventBusUserName=guest 
           - EventBusPassword=guest 
